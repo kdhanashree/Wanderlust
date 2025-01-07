@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <!-- <h1>All listings</h1> -->
+    <!-- <form method="GET" action="/listings/create">
+        <button>Add a New  place</button>
+    </form> -->
+    <style>
+        #filters{
+            /* justify-content: space-around; */
+            display:flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter{
+            
+            text-align: center;
+            margin-left: 2rem;
+            margin-top: 1.5rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+        }
+        .filter p{
+            font-size: 0.8rem;
+        }
+        .tax-info{
+            display:none;
+        }
+        @media(max-width:350px)
+        {
+            .filter:nth-child(n+4)
+            {
+                display:none;
+            }
+        }
+        @media (max-width: 1000px) {
+
+            .filter:nth-child(n+5) {
+                display: none; /* Hide icons from the 4th onward */
+            }
+        }
+        .toggle-switch{
+            border: 2px solid black;
+            border-radius: 1rem;
+            height:3.5rem;
+            text-align: center;
+            padding:0.7rem;
+            
+            margin-left: 5rem;
+        }
+        @media (max-width:335px){
+            .toggle-switch{
+                font-size: smaller;
+                padding-top: 1rem;
+            }
+        }
+        
+    </style>
+ <div id="filters">
+        <div class="filter" data-category="Trending" onclick="submitFilter('Trending')">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter" data-category="Room" onclick="submitFilter('Room')">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Room</p>
+        </div>
+        <div class="filter" data-category="Iconic Cities" onclick="submitFilter('Iconic Cities')">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter" data-category="Mountains" onclick="submitFilter('Mountains')">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter" data-category="Castles" onclick="submitFilter('Castles')">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter" data-category="Amazing Pools" onclick="submitFilter('Amazing Pools')">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter" data-category="Camping" onclick="submitFilter('Camping')">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter" data-category="Farms" onclick="submitFilter('Farms')">
+            <div><i class="fa-solid fa-wheat-awn"></i></div>
+            <p>Farms</p>
+        </div>
+        <div class="filter" data-category="Arctic" onclick="submitFilter('Arctic')">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Arctic</p>
+        </div>
+
+        <div class="toggle-switch">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+                </div>
+        </div>
+</div>
+ 
+ 
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+<%for(let listing of allistings){%>
+        <div class="card listing-card" >
+            <a href="/listings/<%=listing._id%>"><img src="<%=listing.image.url%>" class="card-img-top" alt=".listing_image" style="height: 20rem;"></a>
+        <!-- <div class="card-img-overlay"></div> -->
+            <a href="/listings/<%=listing._id%>"><div class="card-body">
+              <b><p class="card-title"><a href="/listings/<%=listing._id%>"><%=listing.title%></a></p></b>
+             <p>&#8377;<%=listing.price.toLocaleString("en-IN") %> / night
+                <i class="tax-info"> &nbsp;&nbsp; +18% GST</i>
+            </p> 
+            </div></a>
+          </div>
+<%}%>
+</div>
+<!-- .toLocaleString("en-IN") -->
+    
+</body>
+<script>
+
+function submitFilter(category) {
+    // Redirect to the backend with the selected category
+    window.location.href = `/listings/filter?category=${encodeURIComponent(category)}`;
+}
+
+   
+let taxswitch = document.getElementById("flexSwitchCheckDefault");
+
+taxswitch.addEventListener("click", () => {
+    let taxinfo = document.getElementsByClassName("tax-info");
+
+    for (let info of taxinfo) {
+        // Toggle display based on checkbox state
+        if (taxswitch.checked) {
+            info.style.display = "inline"; // Show tax info
+        } else {
+            info.style.display = "none"; // Hide tax info
+        }
+    }
+});
+
+</script>

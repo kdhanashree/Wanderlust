@@ -1,0 +1,79 @@
+<%-layout("../views/layouts/boilerplate.ejs")%>
+<body>
+   
+    <div class="row">
+        <div class="col-8 offset-2 mt-3">
+            <br>
+            <h3>Give Details of the new place!</h3>
+            <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div>
+                    <label for="title" class="form-label">Title</label>
+                    <input placeholder="Add a catchy title" name="title" type="text" class="form-control" required>
+                    <div class="valid-feedback">Title looks good!</div>
+                </div>
+                <div>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description"  rows="4" cols="3" type="text" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please enter a short description</div>
+                </div>
+                <div>
+                    <label for="image" class="form-label">Upload image</label>
+                    <input name="image" type="file" class="form-control" required>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <div>
+                         <label for="category" class="form-label">Category</label>
+                        <!-- <input placeholder="Mountains" name="category" type="text" class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid Category</div> -->
+                        <select class="form-select me-2 " name="category">
+                            <option value="">Select Category</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Rooms">Rooms</option>
+                            <option value="Farms">Farms</option>
+                            <option value="Iconic Cities">Iconic Cities</option>
+                            <option value="Castles">Castles</option>
+                            <option value="Amazing Pools">Amazing Pools</option>
+                            <option value="Camping">Camping</option>
+                            <!-- Country options will be dynamically populated -->
+                          </select>
+                    </div>
+                </div>
+                <!-- <div>
+                    <label for="image" class="form-label">Image Link</label>
+                    <input name="image" placeholder="Enter image link/url" class="form-control" >
+                </div> -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <div>
+                            <label for="price" class="form-label">Price</label>
+                            <input type=number placeholder="1200" name="price" class="form-control" required>
+                            <div class="invalid-feedback">Enter valid price</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 col-md-8">
+                        <div>
+                            <label for="location" class="form-label">Location</label>
+                            <input placeholder="Jaipur,Rajasthan" name="location" type="text" class="form-control" required>
+                            <div class="invalid-feedback">Enter a valid location</div>
+                        </div>
+                    </div>
+
+
+                   
+                </div>
+               
+                <div>
+                    <label for="country" class="form-label">Country</label>
+                    <input placeholder="India" name="country" type="text" class="form-control" required>
+                    <div class="invalid-feedback">Enter a valid Country name</div>
+                </div>
+                <br>
+                <button class="btn btn-dark add-btn">Add</button>
+               
+            </form>
+            <br>
+        </div>
+    </div>
+    
+</body>
